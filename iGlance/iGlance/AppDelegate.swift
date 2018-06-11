@@ -88,7 +88,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         static var tempUnit = TempUnit.Celcius
         static var userWantsCPUBorder = true
         static var userWantsMemBorder = true
-        static var userWantsBatteryNotification = true
+        static var userWantsBatteryNotification = false
         static var lowerBatteryNotificationValue = 20
         static var upperBatteryNotificationValue = 80
     }
