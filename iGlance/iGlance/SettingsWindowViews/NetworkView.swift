@@ -1,5 +1,5 @@
 //
-//  MyMainWindow.swift
+//  NetworkView.swift
 //  iGlance
 //
 //  MIT License
@@ -26,9 +26,19 @@
 
 import Cocoa
 
-class MyMainWindow: NSWindowController {
-    override func windowDidLoad() {
-        super.windowDidLoad()
-        // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+class NetworkView: NSViewController {
+    // define the outlet and the action of the checkbox which is enabling the network statistic icon
+    @IBOutlet var cbNetUsage: NSButton! {
+        didSet {
+            cbNetUsage.state = AppDelegate.UserSettings.userWantsBandwidth ? NSButton.StateValue.on : NSButton.StateValue.off
+        }
+    }
+
+    @IBAction func cbNetUsage_clicked(_: NSButton) {
+        let checked = (cbNetUsage.state == NSButton.StateValue.on)
+        AppDelegate.UserSettings.userWantsBandwidth = checked
+        NetUsageComponent.sItemBandwidth.isVisible = checked
+        UserDefaults.standard.set(checked, forKey: "userWantsBandwidth")
+        checked ? MyStatusItems.insertItem(item: MyStatusItems.StatusItems.bandwidth) : MyStatusItems.removeItem(item: MyStatusItems.StatusItems.bandwidth)
     }
 }
